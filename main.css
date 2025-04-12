@@ -188,14 +188,24 @@ a {
     filter: brightness(2) drop-shadow(0 0 10px rgba(255, 255, 255, 1));
 }
 
-#volume-button {
-    background: none;
-    border: none;
-    color: white;
-    font-size: 24px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
+#volume-control {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: all 0.5s ease;
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 1001;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
+
+#volume-control.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 
 #volume-button:hover {
     transform: scale(1.2);
@@ -203,21 +213,16 @@ a {
 
 #volume-slider {
     display: none;
-    width: 100px;
     opacity: 0;
-    transform: translateX(-20px);
-    transition: opacity 0.3s ease, transform 0.3s ease;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
 }
 
-#volume-control:hover #volume-slider {
+#volume-control:hover #volume-slider,
+#volume-control:focus-within #volume-slider {
     display: block;
     opacity: 1;
     transform: translateX(0);
-}
-
-#volume-slider input {
-    width: 100%;
-    cursor: pointer;
 }
 
 #view-counter {

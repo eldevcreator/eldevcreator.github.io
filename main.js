@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Анимация заголовка
+
     function animateTitle() {
         const title = document.title;
         let index = 0;
@@ -14,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     animateTitle();
 
-    // Основные элементы
     const overlay = document.getElementById('overlay');
     const audio = document.getElementById('background-music');
     const profile = document.getElementById('profile');
@@ -58,49 +57,6 @@ document.addEventListener('DOMContentLoaded', () => {
             tryAlternativeYouTubeMethod();
         }
     }
-
-    async function tryAlternativeYouTubeMethod() {
-        try {
-            const channelUrl = 'https://www.youtube.com/@eldevcreator';
-            const response = await fetch(`https://mixerno.space/api/youtube-channel-counter/user/${encodeURIComponent(channelUrl)}`);
-            const data = await response.json();
-            
-            if (data.counts && data.counts[0] && data.counts[0].count) {
-                document.getElementById('youtube-subs').textContent = 
-                    Number(data.counts[0].count).toLocaleString();
-            }
-        } catch (error) {
-            console.error('Alternative YouTube method failed:', error);
-        }
-    }
-
-    async function getTwitchFollowers() {
-        try {
-
-            const clientId = 'YOUR_TWITCH_CLIENT_ID';
-            const accessToken = 'YOUR_TWITCH_ACCESS_TOKEN';
-            const channelName = 'eldevcreator';
-            
-            // Получаем ID пользователя
-            const userResponse = await fetch(`https://api.twitch.tv/helix/users?login=${channelName}`, {
-                headers: {
-                    'Client-ID': clientId,
-                    'Authorization': `Bearer ${accessToken}`
-                }
-            });
-            
-            const userData = await userResponse.json();
-            
-            if (userData.data && userData.data[0]) {
-                const userId = userData.data[0].id;
-                
-                // Получаем количество подписчиков
-                const followersResponse = await fetch(`https://api.twitch.tv/helix/users/follows?to_id=${userId}&first=1`, {
-                    headers: {
-                        'Client-ID': clientId,
-                        'Authorization': `Bearer ${accessToken}`
-                    }
-                });
                 
                 const followersData = await followersResponse.json();
                 document.getElementById('twitch-followers').textContent = 
@@ -114,20 +70,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Инициализация и обновление счетчиков
-    function initializeCounters() {
-        // Первоначальная загрузка
-        getYouTubeSubscribers();
-        getTwitchFollowers();
-        
-        // Обновляем каждые 5 минут (из-за ограничений API)
-        setInterval(getYouTubeSubscribers, 300000); // 5 минут
-        setInterval(getTwitchFollowers, 300000);    // 5 минут
-    }
-
-    // ========== ОСТАЛЬНАЯ ЛОГИКА ========== //
-
-    // Обработчик клика по оверлею
     overlay.addEventListener('click', async () => {
         try {
             await audio.play();
@@ -140,7 +82,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, index * 150);
             });
 
-            // Инициализация счетчиков после показа профиля
             initializeCounters();
             
             getCurrentTrack();
@@ -151,7 +92,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Управление громкостью
     volumeSlider.addEventListener('input', () => {
         audio.volume = volumeSlider.value;
     });
@@ -160,7 +100,6 @@ document.addEventListener('DOMContentLoaded', () => {
         volumeSlider.style.display = volumeSlider.style.display === 'none' ? 'block' : 'none';
     });
 
-    // Эффект снега для курсора
     function createSnow() {
         const particle = document.createElement('div');
         particle.classList.add('cursor-particle');
@@ -174,7 +113,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     setInterval(createSnow, 100);
 
-    // 3D эффект для фона
     document.addEventListener('mousemove', (e) => {
         const rect = backgroundRect.getBoundingClientRect();
         const centerX = rect.left + rect.width / 2;

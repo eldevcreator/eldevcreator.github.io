@@ -476,10 +476,9 @@ a {
     opacity: 0.8;
 }
 
-/* Мобильная адаптация */
-@media (max-width: 768px) {
+@media (max-width: 700px) {
     #background-rect {
-        width: 95%;
+        width: 70%;
         height: auto;
         min-height: 80vh;
         transform: translate(-50%, -50%) !important;
@@ -491,7 +490,7 @@ a {
     }
 
     .username {
-        font-size: 22px;
+        font-size: 17px;
         margin: 10px 0;
     }
 
@@ -527,7 +526,6 @@ a {
     }
 }
 
-/* Отключение ненужных эффектов на мобилках */
 @media (hover: none) {
     #cursor-trail, .cursor-particle {
         display: none !important;

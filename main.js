@@ -75,7 +75,6 @@ document.addEventListener('DOMContentLoaded', () => {
             
             getCurrentTrack();
             setInterval(getCurrentTrack, 5000);
-        }
     });
 
     volumeSlider.addEventListener('input', () => {

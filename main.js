@@ -58,17 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
                 
-                const followersData = await followersResponse.json();
-                document.getElementById('twitch-followers').textContent = 
-                    followersData.total.toLocaleString();
-            } else {
-                document.getElementById('twitch-followers').textContent = "N/A";
-            }
-        } catch (error) {
-            console.error('Twitch API Error:', error);
-            document.getElementById('twitch-followers').textContent = "Ошибка";
-        }
-    }
 
     overlay.addEventListener('click', async () => {
         try {

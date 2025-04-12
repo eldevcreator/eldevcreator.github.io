@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function getYouTubeSubscribers() {
         try {
-            const apiKey = 'google_api_key';
+            const apiKey = 'AIzaSyC1INfbCv8zPkZA56nbfQCWH5oser9Botc';
             const channelId = 'UClvApXvadLh8XlvMvQvivKA';
             
             const response = await fetch(

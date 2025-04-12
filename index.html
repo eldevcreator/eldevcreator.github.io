@@ -15,43 +15,6 @@
             </div>
         </div>
     </div>
-    <style>
-        /* Стили для блока статуса */
-        #status {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 15px;
-            border-radius: 10px;
-            max-width: 300px;
-            z-index: 1000;
-            backdrop-filter: blur(5px);
-        }
-        
-        #apps-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-top: 10px;
-        }
-        
-        .app-item {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 5px 10px;
-            border-radius: 6px;
-            font-size: 14px;
-        }
-        
-        .app-icon {
-            width: 16px;
-            height: 16px;
-            border-radius: 3px;
-        }
-    </style>
     <div id="background-rect">
         <div id="profile" class="hidden-profile">
             <img src="img/avatar.png" alt="Аватарка" class="avatar hidden-item">
@@ -119,73 +82,6 @@
             <input type="range" id="volume" min="0" max="1" step="0.01" value="1">
         </div>
     </div>
-    <div id="status" class="hidden-item">
-        <h3>🖥️ Сейчас запущено:</h3>
-        <div id="apps-list"></div>
-    </div>
-    <script>
-        // Кастомные иконки для популярных приложений
-        const customIcons = {
-            "chrome": "https://www.google.com/chrome/favicon.ico",
-            "discord": "https://discord.com/assets/favicon.ico",
-            "telegram": "https://telegram.org/favicon.ico",
-            "code": "https://code.visualstudio.com/favicon.ico",
-            "spotify": "https://open.spotify.com/favicon.ico",
-            "steam": "https://store.steampowered.com/favicon.ico",
-            "roblox": "https://www.roblox.com/favicon.ico"
-        };
-
-        function updateRunningApps() {
-            fetch('status.json?v=' + Date.now())
-                .then(response => response.json())
-                .then(data => {
-                    const appsList = document.getElementById("apps-list");
-                    appsList.innerHTML = "";
-                    
-                    // Оставляем только уникальные приложения
-                    const uniqueApps = [...new Set(data.apps)];
-                    
-                    uniqueApps.forEach(app => {
-                        const appName = app.replace(/\.(exe|app|dmg)$/i, "").trim();
-                        const appLower = appName.toLowerCase();
-                        
-                        const appItem = document.createElement("div");
-                        appItem.className = "app-item";
-                        
-                        // Иконка
-                        const icon = document.createElement("img");
-                        icon.className = "app-icon";
-                        icon.src = customIcons[appLower] || 
-                                    `https://www.google.com/s2/favicons?domain=${appLower}.com&sz=32`;
-                        icon.onerror = () => { icon.src = "https://www.google.com/favicon.ico"; };
-                        
-                        // Название
-                        const name = document.createElement("span");
-                        name.textContent = appName;
-                        
-                        appItem.appendChild(icon);
-                        appItem.appendChild(name);
-                        appsList.appendChild(appItem);
-                    });
-                })
-                .catch(error => {
-                    console.log("Ошибка загрузки статуса:", error);
-                });
-        }
-
-        // Показываем блок статуса после загрузки страницы
-        document.addEventListener("DOMContentLoaded", () => {
-            const statusElement = document.getElementById("status");
-            setTimeout(() => {
-                statusElement.classList.remove("hidden-item");
-                statusElement.style.opacity = "1";
-            }, 1500);
-            
-            // Обновляем каждые 5 секунд
-            updateRunningApps();
-            setInterval(updateRunningApps, 5000);
-        });
-    </script>
     <div id="view-counter" class="hidden-item">
         <span id="views">0</span> просмотров
     </div>

@@ -82,7 +82,49 @@
             <input type="range" id="volume" min="0" max="1" step="0.01" value="1">
         </div>
     </div>
+<div id="status">
+  <h2>🖥️ Запущенные приложения:</h2>
+  <div id="apps-list" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
+</div>
 
+<script>
+  function updateAppsList(apps) {
+    const appsList = document.getElementById("apps-list");
+    appsList.innerHTML = "";
+
+    apps.forEach(app => {
+
+      const appName = app.replace(/\.(exe|app|dmg)$/i, "").trim();
+
+      const appBlock = document.createElement("div");
+      appBlock.style.display = "flex";
+      appBlock.style.alignItems = "center";
+      appBlock.style.gap = "5px";
+      appBlock.style.padding = "5px 10px";
+      appBlock.style.background = "#2d2d2d";
+      appBlock.style.borderRadius = "8px";
+
+      const icon = document.createElement("img");
+      icon.src = `https://www.google.com/s2/favicons?domain=${appName}.com&sz=32`;
+      icon.width = 20;
+      icon.height = 20;
+      icon.alt = appName;
+      icon.style.borderRadius = "4px";
+
+      const name = document.createElement("span");
+      name.textContent = appName;
+      name.style.color = "white";
+
+      appBlock.appendChild(icon);
+      appBlock.appendChild(name);
+      appsList.appendChild(appBlock);
+    });
+  }
+
+  fetch('status.json')
+    .then(response => response.json())
+    .then(data => updateAppsList(data.apps));
+</script>
     <div id="view-counter" class="hidden-item">
         <span id="views">0</span> просмотров
     </div>

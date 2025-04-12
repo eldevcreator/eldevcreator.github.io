@@ -144,7 +144,6 @@ document.addEventListener('DOMContentLoaded', () => {
         backgroundRect.style.boxShadow = `0 0 50px rgba(0, 0, 0, 0.3)`;
     });
 
-    // Био кнопка
     if (bioButton && bioText) {
         bioButton.addEventListener('click', () => {
             if (bioText.classList.contains('visible')) {
@@ -165,41 +164,4 @@ document.addEventListener('DOMContentLoaded', () => {
             bioText.classList.add('hidden');
         }
     });
-
-    // Last.fm текущий трек
-    const lastFmApiKey = '48c88a7502bc703003147a37bf3939c3';
-    const lastFmUser = 'eldevcreator';
-
-    async function getCurrentTrack() {
-        try {
-            const response = await fetch(
-                `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${lastFmUser}&api_key=${lastFmApiKey}&format=json&limit=1`
-            );
-            const data = await response.json();
-
-            if (data.recenttracks && data.recenttracks.track.length > 0) {
-                const track = data.recenttracks.track[0];
-                const trackName = track.name;
-                const artistName = track.artist['#text'];
-                const isNowPlaying = track['@attr']?.nowplaying === 'true';
-
-                if (isNowPlaying) {
-                    trackInfo.textContent = `${trackName} - ${artistName}`;
-                    nowPlaying.classList.add('visible');
-                } else {
-                    trackInfo.textContent = 'Ничего не играет.';
-                    nowPlaying.classList.remove('visible');
-                }
-            } else {
-                trackInfo.textContent = 'Не удалось загрузить данные.';
-                nowPlaying.classList.remove('visible');
-            }
-        } catch (error) {
-            console.error('Last.fm Error:', error);
-            nowPlaying.classList.remove('visible');
-        }
-    }
-
-    setInterval(getCurrentTrack, 1000);
-    getCurrentTrack();
 });

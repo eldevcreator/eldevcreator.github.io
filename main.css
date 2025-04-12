@@ -476,73 +476,68 @@ a {
     opacity: 0.8;
 }
 
+/* Мобильная адаптация */
 @media (max-width: 768px) {
     #background-rect {
-        width: 90vw;
+        width: 95%;
         height: auto;
-        min-height: 70vh;
-        padding: 20px 0;
+        min-height: 80vh;
+        transform: translate(-50%, -50%) !important;
     }
 
     .avatar {
-        width: 120px;
-        height: 120px;
+        width: 100px;
+        height: 100px;
     }
 
     .username {
-        font-size: 24px;
+        font-size: 22px;
+        margin: 10px 0;
     }
 
     .icons {
         flex-wrap: wrap;
         justify-content: center;
-        gap: 10px;
+        gap: 8px;
+        margin-top: 10px;
     }
 
     .icons img {
-        width: 40px;
-        height: 40px;
+        width: 36px;
+        height: 36px;
     }
 
     .bio-text {
-        width: 85vw;
-        height: 60vh;
+        width: 90%;
+        height: 50vh;
         font-size: 14px;
         padding: 15px;
+        overflow-y: auto;
     }
 
     #volume-control {
-        bottom: 10px;
-        left: 10px;
+        bottom: 15px;
+        left: 15px;
     }
 
     #view-counter {
-        bottom: 10px;
-        right: 10px;
+        bottom: 15px;
+        right: 15px;
         font-size: 14px;
-    }
-
-    #cursor-trail {
-        display: none;
-    }
-
-    body {
-        cursor: default;
     }
 }
 
-@media (max-width: 480px) {
-    .username {
-        font-size: 20px;
+/* Отключение ненужных эффектов на мобилках */
+@media (hover: none) {
+    #cursor-trail, .cursor-particle {
+        display: none !important;
     }
-
-    .icons img {
-        width: 35px;
-        height: 35px;
+    
+    body {
+        cursor: default !important;
     }
-
-    .bio-button {
-        padding: 6px 15px;
-        font-size: 14px;
+    
+    #background-rect::before {
+        display: none;
     }
 }

@@ -75,9 +75,6 @@ document.addEventListener('DOMContentLoaded', () => {
             
             getCurrentTrack();
             setInterval(getCurrentTrack, 5000);
-        } catch (error) {
-            console.error('Ошибка воспроизведения:', error);
-            alert('Разрешите воспроизведение аудио!');
         }
     });
 

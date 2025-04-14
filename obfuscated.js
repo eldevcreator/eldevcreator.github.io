@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }, 200);
     }
-    animateTitle();
+    setTimeout(animateTitle, 1000);
 
     const overlay = document.getElementById('overlay');
     const audio = document.getElementById('background-music');
@@ -62,7 +62,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 initializeCounters();
             })
             .catch(error => {
-                console.log('Автовоспроизведение заблокировано:', error);
                 overlay.style.display = 'flex';
                 overlay.querySelector('p').textContent = 'Нажмите для включения звука';
             });
@@ -167,20 +166,29 @@ document.addEventListener('DOMContentLoaded', () => {
     volumeSlider.style.transform = 'translateX(-10px)';
     volumeSlider.style.transition = 'all 0.3s ease';
 
-    function createSnow() {
-        const particle = document.createElement('div');
-        particle.classList.add('cursor-particle');
-        particle.style.left = `${Math.random() * window.innerWidth}px`;
-        particle.style.top = `-10px`;
-        cursorTrail.appendChild(particle);
-
-        setTimeout(() => {
-            particle.remove();
-        }, 2000);
-    }
-    setInterval(createSnow, 100);
+    const cursorParticles = [];
+    const maxParticles = 10;
 
     document.addEventListener('mousemove', (e) => {
+        const particle = document.createElement('div');
+        particle.classList.add('cursor-particle');
+        particle.style.left = `${e.clientX}px`;
+        particle.style.top = `${e.clientY}px`;
+        cursorTrail.appendChild(particle);
+
+        cursorParticles.push(particle);
+
+        if (cursorParticles.length > maxParticles) {
+            const oldParticle = cursorParticles.shift();
+            oldParticle.style.opacity = '0';
+            setTimeout(() => oldParticle.remove(), 300);
+        }
+
+        setTimeout(() => {
+            particle.style.opacity = '0';
+            setTimeout(() => particle.remove(), 300);
+        }, 500);
+
         const rect = backgroundRect.getBoundingClientRect();
         const centerX = rect.left + rect.width / 2;
         const centerY = rect.top + rect.height / 2;
@@ -249,7 +257,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    playMedia();
+    setTimeout(playMedia, 1500);
 });
 
 function isMobile() {

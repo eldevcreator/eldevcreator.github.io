@@ -6,6 +6,18 @@
     font-display: swap;
 }
 
+#video-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -1;
+    opacity: 0.7;
+    transition: opacity 0.5s ease;
+}
+
 body {
     font-family: 'AKONY', sans-serif;
     margin: 0;
@@ -68,7 +80,7 @@ a {
     left: 50%;
     width: 550px;
     height: 450px;
-    background: rgba(25, 25, 25, 0.95);
+    background: rgba(25, 25, 25, 0.85);
     border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 30px;
     transform: translate(-50%, -50%) perspective(1000px) rotateX(0deg) rotateY(0deg);
@@ -91,7 +103,9 @@ a {
         rgba(255, 255, 255, 0) 70%);
     pointer-events: none;
 }
-
+#background-rect:hover ~ #video-bg {
+    opacity: 0.9;
+}
 #profile {
     position: fixed;
     top: 50%;

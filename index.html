@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>eldevcreator</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+<body>
+    <video id="background-video" autoplay muted loop playsinline>
+        <source src="video/video.mp4" type="video/mp4">
+    </video>
+    
+    <div id="overlay">
+        <div class="overlay-content">
+            <p>Нажми на меня, чтобы продолжить...</p>
+            <div class="loading-dots">
+                <span>.</span>
+                <span>.</span>
+                <span>.</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="background-rect">
+        <div id="profile" class="hidden-profile">
+            <div id="banner-container">
+                <img src="img/baner.jpg" alt="Баннер" class="profile-banner hidden-item" id="profile-banner">
+                <div class="profile-title hidden-item"></div>
+            </div>
+            <img src="img/avatar.png" alt="Аватарка" class="avatar hidden-item">
+            <h1 class="username hidden-item">eldevcreator</h1>
+            <div class="icons hidden-item">
+                <a href="https://pinterest.com/eldevcreator"><img src="img/icon1.png" alt=""></a>
+                <a href="https://discord.gg/JcVHBs7sDq"><img src="img/icon2.png" alt=""></a>
+                <a href="https://soundcloud.com/eldevcreator"><img src="img/icon4.png" alt=""></a>
+                <a href="https://steamcommunity.com/id/eldevcreator"><img src="img/icon5.png" alt=""></a>
+                <a href="https://twitch.tv/eldevcreator">
+                    <img src="img/icon6.png" alt="">
+                </a>
+                <a href="https://youtube.com/@eldevcreator">
+                    <img src="img/icon7.png" alt="">
+                </a>
+                <div class="bio-text hidden">
+                    <p>Привет, я eldevcreator.</p>
+                    <p>Мне ??? лет.</p>
+                    <p>Живу в России</p>
+                    <p>город ????.</p>
+                    <p>Изучаю программирование.</p>
+                    <p>Люблю слушать музыку по типу</p>
+                    <p><<Кишлак, Пошлая молли>>.</p>
+                    <p>Занимаюсь программированием примерно 5 лет.</p>
+                    <p>Изучаю языки:</p>
+                    <p><< python, c++, c# >>.</p>
+                    <div id="now-playing" class="hidden">
+                        <p>Spotify</p>
+                        <p>Сейчас слушаю:</p>
+                        <p id="track-info">Загрузка...</p>
+                    </div>
+                </div>
+            </div>
+            <div class="buttons hidden-item">
+                <button class="bio-button">Био</button>
+            </div>
+        </div>
+
+        <audio id="background-music" src="mus/music.mp3" loop></audio>
+        
+        <div id="music-player" class="hidden-item">
+            <div id="song-info">
+                <div id="song-name">Хелп мии....</div>
+            </div>
+            <div id="player-controls">
+                <div class="progress-row">
+                    <div id="time-display">00:02</div>
+                    <div id="progress-container">
+                        <div id="progress-bar"></div>
+                    </div>
+                    <div id="time-total">02:07</div>
+                </div>
+                <div class="buttons-row">
+                    <button id="prev-button" class="control-button">⏮</button>
+                    <button id="play-pause-button" class="control-button">⏸</button>
+                    <button id="next-button" class="control-button">⏭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="volume-control" class="hidden-item">
+        <button id="volume-button">🔊</button>
+        <div id="volume-slider">
+            <input type="range" id="volume" min="0" max="1" step="0.01" value="1">
+        </div>
+    </div>
+
+    <div id="cursor-trail"></div>
+
+    <script src="main.js"></script>
+</body>
+</html>

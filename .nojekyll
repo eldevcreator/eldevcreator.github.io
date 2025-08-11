@@ -1,4 +1,4 @@
-touch .nojekyll  # Создаёт файл (если используете терминал)
+touch .nojekyll
 git add .nojekyll
 git commit -m "Allow .well-known directory"
 git push
